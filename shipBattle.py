@@ -40,7 +40,23 @@ def place_ship(board, ship, size):
 
 # Проверяем, можно ли разместить корабль в данной позиции
 def is_valid_placement(board, row, col, orientation, size):
-    return
+    def is_neighboring(row, col):
+        # Проверяет, есть ли соседние клетки (верх, вниз, влево, вправо, диагональ)
+        for dr, dc in [(-1, 0), (1, 0), (0, -1), (0, 1), (-1, -1), (-1, 1), (1, -1), (1, 1)]:
+            r, c = row + dr, col + dc
+            if 0 <= r < 10 and 0 <= c < 10 and board[r][c] != "O":
+                return True
+        return False
+
+    if orientation == "horizontal":
+        for i in range(size):
+            if board[row][col + i] != "O" or is_neighboring(row, col + i):
+                return False
+    else:
+        for i in range(size):
+            if board[row + i][col] != "O" or is_neighboring(row + i, col):
+                return False
+    return True
 
 
 # Получение координат хода от игрока
