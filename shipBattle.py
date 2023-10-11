@@ -12,7 +12,16 @@ def print_board(board, hide_computer_ships=False):
 
 # Размещаем корабли на поле
 def place_ships(board):
-    return
+    def place_ships(board):
+        ships = {
+            "Aircraft Carrier": 4,
+            "Battleship": 3,
+            "Submarine": 2,
+            "Destroyer": 2,
+            "Patrol Boat": 1,
+        }
+        for ship, size in ships.items():
+            place_ship(board, ship, size)
 
 
 # Размещаем один корабль на поле
