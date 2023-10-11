@@ -31,6 +31,12 @@ class TestBattleshipGame(unittest.TestCase):
         with patch('builtins.input', side_effect=["A1"]):
             player_turn(self.computer_board)
         self.assertEqual(self.computer_board[0][0], "*")
+        
+    def test_computer_turn(self):
+        random.seed(0)  # Устанавливаем seed для предсказуемости теста
+        row, col = computer_turn(self.player_board)
+        self.assertTrue(0 <= row < 10)
+        self.assertTrue(0 <= col < 10)
 
 if __name__ == '__main__':
     unittest.main()
