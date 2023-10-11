@@ -3,7 +3,11 @@ import random
 
 # Создаем игровое поле размером 10x10
 def create_board():
-    return
+    board = []
+    for _ in range(10):
+        row = ["O"] * 10  # "O" обозначает пустое место
+        board.append(row)
+    return board
 
 # Выводим игровое поле
 def print_board(board, hide_computer_ships=False):
@@ -103,7 +107,11 @@ def player_turn(board):
 
 # Ход компьютера
 def computer_turn(board):
-    return
+    while True:
+        row = random.randint(0, 9)
+        col = random.randint(0, 9)
+        if board[row][col] != "X" and board[row][col] != "*":
+            return row, col
 
 
 # Обработка попадания или промаха
@@ -120,12 +128,43 @@ def process_shot(board, row, col):
 
 # Проверка завершения игры
 def check_game_over(board):
-    return
+    # Подсчитываем количество оставшихся кораблей
+    remaining_ships = sum(board.count("S") for board in board)
+    # Если не осталось кораблей, игра завершена
+    return remaining_ships == 0
 
 
 # Основная функция игры
 def main():
-    return
+    player_board = create_board()
+    computer_board = create_board()
+
+    print("Добро пожаловать в игру 'Морской бой'!")
+    print("Ваше поле:")
+    print_board(player_board)
+
+    place_ships(player_board)
+    place_ships(computer_board)
+
+    while True:
+        player_turn(computer_board)
+
+        print("\nПоле компьютера:")
+        print_board(computer_board, hide_computer_ships=True)
+
+        if check_game_over(computer_board):
+            print("Вы выиграли! Поздравляем!")
+            break
+
+        computer_row, computer_col = computer_turn(player_board)
+        process_shot(player_board, computer_row, computer_col)
+
+        print("\nВаше поле:")
+        print_board(player_board)
+
+        if check_game_over(player_board):
+            print("Компьютер выиграл. Попробуйте еще раз.")
+            break
 
 
 if __name__ == "__main__":
