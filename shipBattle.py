@@ -45,7 +45,18 @@ def is_valid_placement(board, row, col, orientation, size):
 
 # Получение координат хода от игрока
 def get_player_move():
-    return
+    while True:
+        try:
+            print("\nВаш ход:")
+            guess = input("Введите координаты (например, A3): ").upper()
+            col = ord(guess[0]) - ord("A")
+            row = int(guess[1:]) - 1
+            if 0 <= row < 10 and 0 <= col < 10:
+                return row, col
+            else:
+                print("Неверные координаты. Пожалуйста, введите снова.")
+        except (ValueError, IndexError):
+            print("Неверный формат ввода. Пожалуйста, введите снова.")
 
 
 # Ход игрока
