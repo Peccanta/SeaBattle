@@ -61,7 +61,13 @@ def get_player_move():
 
 # Ход игрока
 def player_turn(board):
-    return
+    player_row, player_col = get_player_move()
+    if board[player_row][player_col] == "S":
+        print("Попадание!")
+        board[player_row][player_col] = "X"
+    else:
+        print("Промах.")
+        board[player_row][player_col] = "*"
 
 
 # Ход компьютера
