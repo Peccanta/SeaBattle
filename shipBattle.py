@@ -35,7 +35,22 @@ def place_ships(board):
 
 # Размещаем один корабль на поле
 def place_ship(board, ship, size):
-    return
+    while True:
+        orientation = random.choice(["horizontal", "vertical"])
+        if orientation == "horizontal":
+            row = random.randint(0, 9)
+            col = random.randint(0, 10 - size)
+        else:
+            row = random.randint(0, 10 - size)
+            col = random.randint(0, 9)
+        if is_valid_placement(board, row, col, orientation, size):
+            if orientation == "horizontal":
+                for i in range(size):
+                    board[row][col + i] = "S"  # "S" обозначает корабль
+            else:
+                for i in range(size):
+                    board[row + i][col] = "S"  # "S" обозначает корабль
+            break
 
 
 # Проверяем, можно ли разместить корабль в данной позиции
