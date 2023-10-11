@@ -60,7 +60,14 @@ def computer_turn(board):
 
 # Обработка попадания или промаха
 def process_shot(board, row, col):
-    return
+    if board[row][col] == "S":
+        result = "Попадание!"
+        board[row][col] = "X"
+    else:
+        result = "Промах."
+        board[row][col] = "*"
+    print(f"Result: {result}")  # Add this line for debugging
+    return result
 
 
 # Проверка завершения игры
