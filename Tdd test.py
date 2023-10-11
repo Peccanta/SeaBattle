@@ -14,6 +14,13 @@ class TestBattleshipGame(unittest.TestCase):
         self.player_board = create_board()
         self.computer_board = create_board()
 
+    def test_print_board(self):
+        with patch('sys.stdout', new_callable=StringIO) as mock_stdout:
+            print_board(self.player_board)
+            output = mock_stdout.getvalue()
+            self.assertTrue("  A B C D E F G H I J" in output)
+            self.assertTrue("1 O O O O O O O O O O" in output)
+
 
 if __name__ == '__main__':
     unittest.main()
