@@ -26,6 +26,11 @@ class TestBattleshipGame(unittest.TestCase):
             row, col = get_player_move()
             self.assertEqual(row, 2)
             self.assertEqual(col, 0)
+            
+    def test_player_turn(self):
+        with patch('builtins.input', side_effect=["A1"]):
+            player_turn(self.computer_board)
+        self.assertEqual(self.computer_board[0][0], "*")
 
 if __name__ == '__main__':
     unittest.main()
